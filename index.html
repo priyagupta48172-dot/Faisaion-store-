@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StyleHub - Fashion Store</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+    color:#222;
+}
+
+/* NAVBAR */
+
+header{
+    background:#111;
+    color:white;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#ff4f81;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:#ff4f81;
+}
+
+.cart-btn{
+    border:0;
+    background:#ff4f81;
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+    min-height:470px;
+    display:flex;
+    align-items:center;
+    padding:50px 8%;
+    color:white;
+
+    background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=80");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{
+    max-width:600px;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:19px;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    background:#ff4f81;
+    border:0;
+    padding:13px 28px;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.shop-btn:hover{
+    background:#e83c6e;
+}
+
+/* SECTIONS */
+
+section{
+    padding:55px 6%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.title span{
+    color:#ff4f81;
+}
+
+/* SEARCH */
+
+.controls{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+#search{
+    width:300px;
+    padding:13px 18px;
+    border:1px solid #ddd;
+    border-radius:25px;
+    outline:none;
+}
+
+select{
+    padding:12px 20px;
+    border:1px solid #ddd;
+    border-radius:20px;
+    background:white;
+    outline:none;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+}
+
+.card-img{
+    height:270px;
+    position:relative;
+}
+
+.card-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.discount{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#ff4f81;
+    color:white;
+    padding:6px 9px;
+    border-radius:5px;
+    font-size:12px;
+}
+
+.heart{
+    position:absolute;
+    right:12px;
+    top:12px;
+    border:0;
+    background:white;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.heart.active{
+    color:#ff4f81;
+}
+
+.card-body{
+    padding:17px;
+}
+
+.card-body h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.category{
+    color:#777;
+    text-transform:capitalize;
+    font-size:14px;
+}
+
+.rating{
+    color:#f5a623;
+    margin:8px 0;
+}
+
+.price{
+    font-size:21px;
+    font-weight:bold;
+    color:#111;
+    margin-bottom:12px;
+}
+
+.old-price{
+    font-size:14px;
+    color:#999;
+    text-decoration:line-through;
+    margin-left:6px;
+    font-weight:normal;
+}
+
+.add-btn{
+    width:100%;
+    padding:11px;
+    background:#111;
+    color:white;
+    border:0;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    background:#ff4f81;
+}
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+    font-size:20px;
+    padding:50px;
+}
+
+/* CART */
+
+.cart{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:400px;
+    height:100%;
+    background:white;
+    z-index:2000;
+    padding:25px;
+    box-shadow:-5px 0 20px rgba(0,0,0,.2);
+    transition:.4s;
+    overflow-y:auto;
+}
+
+.cart.open{
+    right:0;
+}
+
+.cart-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cart-item img{
+    width:70px;
+    height:75px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:8px;
+}
+
+.qty button{
+    width:25px;
+    height:25px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+}
+
+.remove{
+    color:red;
+    border:0 !important;
+    background:none !important;
+    width:auto !important;
+}
+
+.total{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:25px;
+}
+
+.checkout{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    background:#ff4f81;
+    color:white;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* ABOUT */
+
+.about{
+    background:white;
+    text-align:center;
+}
+
+.about p{
+    max-width:750px;
+    margin:auto;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+footer h2{
+    margin-bottom:10px;
+}
+
+.social{
+    margin-top:15px;
+    font-size:22px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    nav{
+        display:none;
+        width:100%;
+        flex-direction:column;
+    }
+
+    nav.show{
+        display:flex;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cart{
+        width:100%;
+        right:-100%;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    #search{
+        width:100%;
+    }
+
+    .hero{
+        min-height:420px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <div class="logo">
+        STYLE<span>HUB</span>
+    </div>
+
+    <nav id="nav">
+
+        <a href="#home">Home</a>
+
+        <a href="#shop">Shop</a>
+
+        <a href="#about">About</a>
+
+    </nav>
+
+    <button class="cart-btn" onclick="openCart()">
+
+        🛒 Cart
+        (<span id="cartCount">0</span>)
+
+    </button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>Fashion For Everyone</h1>
+
+        <p>
+            Trendy fashion at affordable prices.
+            Find your favourite style today.
+        </p>
+
+        <button
+            class="shop-btn"
+            onclick="goToShop()">
+
+            Shop Now
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SHOP ================= -->
+
+<section id="shop">
+
+    <h2 class="title">
+        Our <span>Fashion Collection</span>
+    </h2>
+
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search products..."
+            oninput="searchProducts()"
+        >
+
+
+        <select
+            id="category"
+            onchange="filterProducts()">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="beauty">
+                Beauty
+            </option>
+
+            <option value="fragrances">
+                Fragrances
+            </option>
+
+            <option value="furniture">
+                Furniture
+            </option>
+
+            <option value="groceries">
+                Groceries
+            </option>
+
+            <option value="laptops">
+                Laptops
+            </option>
+
+            <option value="mens-shirts">
+                Men's Shirts
+            </option>
+
+            <option value="mens-shoes">
+                Men's Shoes
+            </option>
+
+            <option value="mens-watches">
+                Men's Watches
+            </option>
+
+            <option value="tops">
+                Tops
+            </option>
+
+            <option value="womens-dresses">
+                Women's Dresses
+            </option>
+
+            <option value="womens-shoes">
+                Women's Shoes
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="products"
+        class="products">
+
+        <div class="loading">
+
+            ⏳ Loading Fashion Products...
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <h2 class="title">
+        About <span>StyleHub</span>
+    </h2>
+
+    <p>
+
+        StyleHub is a modern fashion store where
+        you can discover trendy products at affordable
+        prices. Products are loaded dynamically using
+        an API.
+
+    </p>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>STYLEHUB</h2>
+
+    <p>
+        Fashion • Style • Confidence
+    </p>
+
+    <div class="social">
+
+        📷 &nbsp;
+        📘 &nbsp;
+        🐦 &nbsp;
+        ▶️
+
+    </div>
+
+    <p style="margin-top:20px;">
+
+        © 2026 StyleHub.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+<!-- ================= CART ================= -->
+
+<div class="cart" id="cart">
+
+    <div class="cart-head">
+
+        <h2>
+            Shopping Cart
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeCart()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div id="cartItems"></div>
+
+
+    <div class="total">
+
+        Total:
+        ₹<span id="total">0</span>
+
+    </div>
+
+
+    <button
+        class="checkout"
+        onclick="checkout()">
+
+        Proceed to Checkout
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   API
+===================================== */
+
+const API_URL =
+"https://dummyjson.com/products?limit=100";
+
+
+let allProducts = [];
+
+let cart = [];
+
+
+/* =====================================
+   LOAD PRODUCTS
+===================================== */
+
+async function loadProducts(){
+
+    const container =
+        document.getElementById("products");
+
+
+    try{
+
+        const response =
+            await fetch(API_URL);
+
+
+        if(!response.ok){
+
+            throw new Error("API Error");
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        allProducts =
+            data.products;
+
+
+        displayProducts(allProducts);
+
+    }
+
+    catch(error){
+
+        container.innerHTML = `
+
+            <div
+                style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:50px;
+                ">
+
+                <h2>
+                    ❌ Products Load Nahi Ho Rahe
+                </h2>
+
+                <p>
+                    Internet connection check karein.
+                </p>
+
+                <br>
+
+                <button
+                    class="shop-btn"
+                    onclick="loadProducts()">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
+
+        console.log(error);
+
+    }
+
+}
+
+
+/* =====================================
+   LOW PRICE FUNCTION
+===================================== */
+
+function getLowPrice(product){
+
+    /*
+       API price ko directly use nahi karenge.
+
+       Har product ke liye low affordable
+       demo price generate hoga.
+    */
+
+    const price =
+        199 + ((product.id * 37) % 701);
+
+    return Math.round(price / 10) * 10;
+
+}
+
+
+/* =====================================
+   OLD PRICE
+===================================== */
+
+function getOldPrice(product){
+
+    const price =
+        getLowPrice(product);
+
+    return price + 300;
+
+}
+
+
+/* =====================================
+   DISPLAY PRODUCTS
+===================================== */
+
+function displayProducts(products){
+
+    const container =
+        document.getElementById("products");
+
+
+    container.innerHTML = "";
+
+
+    if(products.length === 0){
+
+        container.innerHTML = `
+
+            <div
+                style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:40px;
+                ">
+
+                <h2>
+                    😔 No Products Found
+                </h2>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    products.forEach(product => {
+
+
+        const price =
+            getLowPrice(product);
+
+
+        const oldPrice =
+            getOldPrice(product);
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+            <div class="card-img">
+
+                <img
+                    src="${product.thumbnail}"
+                    alt="${product.title}"
+                >
+
+                <span class="discount">
+                    LOW PRICE
+                </span>
+
+                <button
+                    class="heart"
+                    onclick="toggleWishlist(this)">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <h3>
+                    ${product.title}
+                </h3>
+
+
+                <div class="category">
+
+                    ${product.category}
+
+                </div>
+
+
+                <div class="rating">
+
+                    ⭐ ${product.rating}
+
+                </div>
+
+
+                <div class="price">
+
+                    ₹${price}
+
+                    <span class="old-price">
+
+                        ₹${oldPrice}
+
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart(${product.id})">
+
+                    🛒 Add to Cart
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+function searchProducts(){
+
+    const text =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const category =
+        document
+        .getElementById("category")
+        .value;
+
+
+    const result =
+        allProducts.filter(product => {
+
+
+            const matchText =
+                product.title
+                .toLowerCase()
+                .includes(text);
+
+
+            const matchCategory =
+                category === "all" ||
+                product.category === category;
+
+
+            return matchText && matchCategory;
+
+        });
+
+
+    displayProducts(result);
+
+}
+
+
+/* =====================================
+   CATEGORY
+===================================== */
+
+function filterProducts(){
+
+    searchProducts();
+
+}
+
+
+/* =====================================
+   WISHLIST
+===================================== */
+
+function toggleWishlist(button){
+
+    button.classList.toggle("active");
+
+
+    if(
+        button.classList.contains("active")
+    ){
+
+        button.innerHTML = "♥";
+
+    }
+
+    else{
+
+        button.innerHTML = "♡";
+
+    }
+
+}
+
+
+/* =====================================
+   ADD TO CART
+===================================== */
+
+function addToCart(id){
+
+    const product =
+        allProducts.find(
+            p => p.id === id
+        );
+
+
+    const existing =
+        cart.find(
+            item => item.id === id
+        );
+
+
+    if(existing){
+
+        existing.quantity++;
+
+    }
+
+    else{
+
+        cart.push({
+
+            id:product.id,
+
+            title:product.title,
+
+            price:getLowPrice(product),
+
+            image:product.thumbnail,
+
+            quantity:1
+
+        });
+
+    }
+
+
+    updateCart();
+
+    openCart();
+
+}
+
+
+/* =====================================
+   UPDATE CART
+===================================== */
+
+function updateCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+
+    container.innerHTML = "";
+
+
+    let total = 0;
+
+    let count = 0;
+
+
+    cart.forEach(item => {
+
+
+        total +=
+            item.price *
+            item.quantity;
+
+
+        count +=
+            item.quantity;
+
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <img
+                    src="${item.image}"
+                >
+
+
+                <div class="cart-info">
+
+                    <h4>
+                        ${item.title}
+                    </h4>
+
+                    <p>
+                        ₹${item.price}
+                    </p>
+
+
+                    <div class="qty">
+
+                        <button
+                            onclick="
+                            changeQuantity(
+                                ${item.id},
+                                -1
+                            )">
+
+                            -
+
+                        </button>
+
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+
+                        <button
+                            onclick="
+                            changeQuantity(
+                                ${item.id},
+                                1
+                            )">
+
+                            +
+
+                        </button>
+
+
+                        <button
+                            class="remove"
+                            onclick="
+                            removeItem(
+                                ${item.id}
+                            )">
+
+                            Remove
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("total")
+        .innerText = total;
+
+
+    document.getElementById("cartCount")
+        .innerText = count;
+
+}
+
+
+/* =====================================
+   QUANTITY
+===================================== */
+
+function changeQuantity(id,change){
+
+    const item =
+        cart.find(
+            item => item.id === id
+        );
+
+
+    if(!item) return;
+
+
+    item.quantity += change;
+
+
+    if(item.quantity <= 0){
+
+        cart =
+            cart.filter(
+                item => item.id !== id
+            );
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* =====================================
+   REMOVE ITEM
+===================================== */
+
+function removeItem(id){
+
+    cart =
+        cart.filter(
+            item => item.id !== id
+        );
+
+
+    updateCart();
+
+}
+
+
+/* =====================================
+   OPEN CART
+===================================== */
+
+function openCart(){
+
+    document
+        .getElementById("cart")
+        .classList.add("open");
+
+}
+
+
+/* =====================================
+   CLOSE CART
+===================================== */
+
+function closeCart(){
+
+    document
+        .getElementById("cart")
+        .classList.remove("open");
+
+}
+
+
+/* =====================================
+   CHECKOUT
+===================================== */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        alert(
+            "Your cart is empty!"
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "🎉 Order placed successfully!\n\n" +
+        "Thank you for shopping with StyleHub."
+    );
+
+
+    cart = [];
+
+
+    updateCart();
+
+
+    closeCart();
+
+}
+
+
+/* =====================================
+   SHOP BUTTON
+===================================== */
+
+function goToShop(){
+
+    document
+        .getElementById("shop")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =====================================
+   LOAD API
+===================================== */
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
